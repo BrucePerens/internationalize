@@ -1,7 +1,9 @@
-module Internationalize
-  
-  # Translation functions.
-  extend self
+module I18n
+  macro finished
+    {% for key, value in Translations %}
+      {% puts "#{key} => #{value}" %}
+    {% end %}
+  end
 
   macro t(original, name = nil)
     {% if original.class_name == "StringInterpolation" %}
@@ -28,20 +30,21 @@ module Internationalize
           {% raise "#{original} at #{original.filename}:#{original.line_number}: #{e.class_name} in interpolated string." %}
         {% end %}
       {% end %}
-      # From {{original.id}} at {{original.filename.id}}:{{original.line_number}}
-      {{ %Q[translate("#{native.id}", #{expressions.id}, :#{name.id.stringify.gsub(/^"|"$/, "")})].id }}
-        
     {% elsif original.class_name == "StringLiteral" %}
       {% native = original; expressions = nil %}
     {% else %}
       {% raise "t(#{original}) at #{original.filename.id}:#{original.line_number}: the argument must be a literal string, not a variable or expression." %}
     {% end %}
-    {% name ||= native %}
-    {{ comment = "# From #{original} at #{original.filename.id}:#{original.line_number}" }}
-    translate({{native.id.stringify}}, {{expressions}}, :{{name.id.stringify.gsub(/^"|"$/, "")}})
+    {% name = ":#{(name ||= native).id.stringify.gsub(/^"|"$/, "")}".id %}
+    {% native = ":#{native.id.stringify.gsub(/^"|"$/, "")}".id %}
+    # From {{original}} at {{original.filename.id}}:{{original.line_number}}"
+    translate({{native}}, {{expressions}}, {{name}})
     {% if flag?(:"emit-translation-strings") %}
-      {% puts comment %}
-      {% puts %Q[:#{name.id.stringify.gsub(/^"|"$/, "")} = { #{native}, :#{original.filename}, #{original.line_number} }].id %}
+      {% if (t = Translations[name]) == nil %}
+        {% Translations[name] = { native, [{ ":#{original.filename}".id, original.line_number }] } %}
+      {% else %}
+        {% t.last.push({ ":#{original.filename}".id, original.line_number }) %}
+      {% end %}
     {% end %}
   end
 end
