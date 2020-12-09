@@ -1,14 +1,4 @@
 module I18n
-    macro finished
-      {% if flag?(:"emit-translation-strings") %}
-        {% puts "Translations = {" %}
-        {% for key, value in Translations %}
-          {% puts "  #{key} => #{value}," %}
-        {% end %}
-        {% puts "} of String => Tuple(String, Array(String)|Nil, Array(Tuple(String, Int32)))" %}
-      {% end %}
-    end
-
   macro t(original, name = nil, exp = nil)
     {% if original.class_name == "StringInterpolation" %}
       {% expressions = [] of StringLiteral %}
@@ -47,10 +37,10 @@ module I18n
       {% raise "exp=#{exp} at #{original.filename}:#{original.line_number}: must be a string or array of strings." %}
     {% end %}
     # From {{original}} at {{original.filename.id}}:{{original.line_number}}"
-    translate({{native}}, {{expressions}}, {{name}})
+    I18n.translate({{native}}, {{expressions}}, {{name}}, language_tag)
     {% if flag?(:"emit-translation-strings") %}
-      {% if (t = Translations[name]) == nil %}
-        {% Translations[name] = { native, exp, { original.filename, original.line_number } } %}
+      {% if (t = Strings[name]) == nil %}
+        {% Strings[name] = { native, exp, [{ original.filename, original.line_number }] } %}
       {% else %}
         {% if exp != t[1] %}
           {% puts "Warning: combining multiple versions of the same string, with different values of `exp`, at #{original.filename}:#{original.line_number} and #{t.last}. If you want these to be separate, provide different values for `name`." %}
