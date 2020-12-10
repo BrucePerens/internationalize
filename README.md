@@ -1,5 +1,3 @@
-# i18n for the Crystal programming language
-
 # I18n: Internationalization for the Crystal Language.
 Internationalize strings in your program, including *interpolated* strings.
 ## Simple Usage
