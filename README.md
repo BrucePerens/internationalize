@@ -1,8 +1,8 @@
 # i18n for the Crystal programming language
 
-= I18n: Internationalization for the Crystal Language.
+# I18n: Internationalization for the Crystal Language.
 Internationalize strings in your program, including *interpolated* strings.
-== Simple Usage
+## Simple Usage
 Install from the command line:
 ```shell
 shards install BrucePerens/i18n
@@ -80,7 +80,6 @@ language tags are "en-US" for English as spoken in the United States, and
 
 Translations are defined in a `Hash` called `I18n::Translations`.
 This hash contains a hash for each translated language.
-```
 
 A variable, method, or function `language_tag` must exist in the context where
 the `t()` function is called, which is or returns a
@@ -90,7 +89,7 @@ or Mexican Spanish). Note that language_tag need not be global, it may exist
 as a method or a local variable, as long as it is defined in all contexts
 where `t()` is called.
 
-NOTE: Complications of Translation
+# NOTE: Complications of Translation
 
 At some point you will be askng translators to translate your strings
 into different languages. You will probably start with a machine
