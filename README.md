@@ -107,7 +107,7 @@ When the argument `-Demit-translation-strings` is provided to
 `crystal build`,
 the compiler will emit a table of all of the strings that are provided
 as arguments to `t`.
-These are written to `STDOUT` using the `Crystal::Macros#p` method.
+These are written to `STDOUT` using the `Crystal::Macros#puts` method.
 This table can be edited into a translation file by the
 programmer and translator, and is intended to be used by a program for
 filling in such files using machine translation (not yet written).
