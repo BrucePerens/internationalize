@@ -96,6 +96,7 @@ t "string", add: [user.preferred_pronoun(language_tag)]
 ```
 This is sometimes necessary because languages other than English tend to
 masculinize sentences if the proper gender pronoun is not known.
+
 When the argument `-Demit-translation-strings` is provided to
 `crystal build`,
 the compiler will emit a table of all of the strings that are provided
