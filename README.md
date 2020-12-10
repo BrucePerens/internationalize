@@ -111,10 +111,11 @@ This hash contains a hash for each translated language.
 A variable, method, or function `language_tag` must exist in the context where
 `t` is called, which is or returns a
 string for the language tag of the present user. So, this would be of
-the form `language_tag = "es"` for Spanish, and 
-Note that language_tag need not be global, it may exist
-as a method or a local variable, as long as it is defined in all contexts
-where `t()` is called.
+the form `language_tag = "es"` for Spanish.
+`language_tag` need not be global, it may exist
+as a function, method or a local variable, as long as it is defined in all
+contexts
+where `t` is called.
 
 # NOTE: Complications of Translation
 
