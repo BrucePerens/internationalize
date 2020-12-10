@@ -27,7 +27,7 @@ Use in your project:
 
   
   # This translates an *interpolated* string (that's what we call a string
-  # containing one or more `#{crystal-expression}`), giving a name to the
+  # containing one or more #{crystal-expression}), giving a name to the
   # string which will be used as a key in the translation file.
   t "An #{1+1} interpolated string", name: "introduce interpolated string"
 
@@ -158,3 +158,15 @@ to `language_tag`).
 This is important because people take offense to being referred to by
 a pronoun other than their preferred one,
 and this is even a matter of [California Law](https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=201720180SB179) (applying to government agencies rather than citizens).
+
+## To-Do
+* Provide a compiler flag to check that a translation exists for all strings
+in the program.
+* Provide a program to generate machine translations, using a cloud translation
+API.
+* Provide common facilities, such as number and time format functions,
+and functions that translate the user's preferred pronoun, so that whether
+the user has set it to "he", "she", "they", "it", or "hir", it is tranlated
+appropriately.
+* Provide automatic updating of a previously-generated translation file
+without loss of information.
