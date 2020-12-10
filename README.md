@@ -25,8 +25,9 @@ Use in your project:
   t "Any string." # => "translated string"
 
   
-  # This translates an interpolated string, giving a name to the string
-  # which will be used as a key in the translation file.
+  # This translates an *interpolated* string (that's what we call a string
+  # containing one or more `#{crystal-expression}`), giving a name to the
+  # string which will be used as a key in the translation file.
   t "An #{1+1} interpolated string", name: "introduce interpolated string"
 
   # This translates a string, including an explantion to the translator
@@ -54,12 +55,37 @@ interpolations replaced by `$0`, `$1`, etc. The value tuple contains the
 translated string, with the interpolated arguments potentially in a
 different order from the native string, the explanation for the interpolated
 parts of the string (if provided), and a list of the filenanes and line-numbers
-where the string occurrs in the original source.
+where the native string occurs in the original source.
 
 The argument to `t` must be a literal string (including interpolated strings),
 not a method, expression, or variable. This is because much of the
 translation mechanism runs as macros at compile-time.
 
+Strings that are identical except for the interpolated expressions are
+combined, and appear *once* in the translation file.
+So, these two strings would be combined:
+```crystal
+a = t "Today's number is #{1+1}!"
+a = t "Today's number is #{22.0/7.0}!"
+```
+This keeps the translator from having to do repeated work, but is sometimes
+incorrect. If you want two similar strings to be translated separately, give
+them different names, as in:
+```crystal
+a = t "Today's number is #{1+1}!", name: "Today's number for toddlers"
+a = t "Today's number is #{22.0/7.0}!", name: "Today's number for pre-teens"
+```
+The translation file will be sorted alphabetically by `name`. The default `name`
+is a version of the native string with interpolations replaced by `$0`, `$1`,
+etc.
+
+The `exp` argument to `t` is an explanation of the interpolated portions of
+the string for the translator. If there is only one interpolation in the
+string, this can be a string. When there is more than one interpolation, it
+should be an array of strings corresponding to each interpolation, as in
+```crystal
+t "string", exp: ["explantion of first interpolation", "explanation of second interpolation"]
+```
 When the argument `-Demit-translation-strings` is provided to
 `crystal build`,
 the compiler will emit a table of all of the strings that are provided
@@ -91,8 +117,7 @@ where `t()` is called.
 
 At some point you will be askng translators to translate your strings
 into different languages. You will probably start with a machine
-translation, but these can not be expected to be correct, especially
-where interpolated strings are concerned.
+translation, but these can not be expected to be correct.
 There is not an exact one-to-one mapping of words in two languages to the
 same meaning. Nor can you expect the order of words in a sentence to remain
 the same, since grammars vary widely between languages.
