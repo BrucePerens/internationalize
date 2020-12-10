@@ -12,11 +12,12 @@ Use in your project:
   include I18n
 
   def language_tag
-    # Define this method to return the appropriate IETF language tag for the
-    # user. This would generally come from the HTTP `Accept-Language` header,
-    # or a preference entered by the user. This method must be in scope
-    # whenever you call the `t` method to translate a string. It can be a
-    # method of `self`, a local variable, or a function.
+    # Define this method to return the appropriate IETF or ISO 639 language
+    # tag for the user. This would generally come from the
+    # HTTP `Accept-Language` header, or a preference entered by the user.
+    # This method must be in scope whenever you call the `t` method to
+    # translate a string. It can be a method of `self`, a local variable,
+    # or a function.
     return "en-US"
   end
 
@@ -45,7 +46,7 @@ This creates the data structure necessary to translate all strings in your
 program. Then you will have to fill in the translations. The translation file
 will look like this:
 ```crystal
-# Replace "tag" with the appropriate IETF language tag."
+# Replace "tag" with the appropriate IETF or ISO 639 language tag."
 I18n::Translations["tag"] = {
   "A $0 native language $1" => {"A $1 translated language $0", ["The user's real name", "The city in which the user lives"], [{"/home/bruce/Crystal/internationalize/src/test.cr", 9}]},
 } of String => Tuple(String, Array(String)|Nil, Array(Tuple(String, Int32)))
@@ -97,19 +98,21 @@ filling in such files using machine translation (not yet written).
 
 Languages are commonly referred to using
 [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag),
-but the program does not enforce this, and 
-Two common
+or similar tags defined in [ISO 639-3](https://en.wikipedia.org/wiki/ISO_639-3),
+but the program does not enforce this. Two common
 language tags are "en-US" for English as spoken in the United States, and
-"en" for English not distinguishing where it is spoken.
+"en" for English not distinguishing where it is spoken. Parsing the languages
+provided by a web client's `Accept-Language` header into the tags you are
+actually using may be complicated.
 
 Translations are defined in a `Hash` called `I18n::Translations`.
 This hash contains a hash for each translated language.
 
 A variable, method, or function `language_tag` must exist in the context where
-the `t()` function is called, which is or returns a
+`t` is called, which is or returns a
 string for the language tag of the present user. So, this would be of
-the form `language_tag = "es"` for Spanish (not distinguishing Castilian
-or Mexican Spanish). Note that language_tag need not be global, it may exist
+the form `language_tag = "es"` for Spanish, and 
+Note that language_tag need not be global, it may exist
 as a method or a local variable, as long as it is defined in all contexts
 where `t()` is called.
 
