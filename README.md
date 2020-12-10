@@ -165,6 +165,7 @@ a pronoun other than their preferred one,
 and this is even a matter of [California Law](https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=201720180SB179) (applying to government agencies rather than citizens).
 
 ## To-Do
+* TESTS!
 * Provide a compiler flag to check that a translation exists for all strings
 in the program.
 * Provide a program to generate machine translations, using a cloud translation
