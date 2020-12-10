@@ -1,5 +1,5 @@
 module I18n
-  macro t(original, name = nil, exp = nil, add = [])
+  macro t(original, name = nil, exp = nil, add = nil)
     {% if original.class_name == "StringInterpolation" %}
       {% expressions = [] of StringLiteral %}
       {% native = "" %}
@@ -24,7 +24,9 @@ module I18n
           {% raise "#{original} at #{original.filename}:#{original.line_number}: #{e.class_name} in interpolated string." %}
         {% end %}
       {% end %}
-      {% expressions += add %}
+      {% if add %}
+        {% expressions += add %}
+      {% end %}
     {% elsif original.class_name == "StringLiteral" %}
       {% native = original; expressions = nil %}
     {% else %}
