@@ -6,7 +6,7 @@ it's stable.
 ## Simple Usage
 Add to shards.yml
 ```
-    I18n:
+    i18n:
       github: BrucePerens/internationalize
       version: "~> 0.5"
 ```
