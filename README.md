@@ -1,5 +1,8 @@
 # I18n: Internationalization for the Crystal Language.
 Internationalize strings in your program, including *interpolated* strings.
+
+THIS PACKAGE WILL BE CHECKED IN OVER http://github.com/BrucePerens/i18n when
+it's stable.
 ## Simple Usage
 Add to shards.yml
 ```
