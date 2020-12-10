@@ -99,8 +99,9 @@ pronoun for the user:
 ```crystal
 t "string", add: [user.preferred_pronoun(language_tag)]
 ```
-This is sometimes necessary because languages other than English tend to
-masculinize sentences if the proper gender pronoun is not known.
+This is sometimes necessary because languages other than English may gender
+nouns, and thus translations tend to masculinize sentences unless the
+programmer and translators take some care to avoid that.
 
 When the argument `-Demit-translation-strings` is provided to
 `crystal build`,
