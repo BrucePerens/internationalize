@@ -156,4 +156,4 @@ to `language_tag`).
 
 This is important because people take offense to being referred to by
 a pronoun other than their preferred one,
-and this is even a matter of [California Law](https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=201720180SB179)
+and this is even a matter of [California Law](https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=201720180SB179) (applying to government agencies rather than citizens).
