@@ -1,5 +1,5 @@
-name: i18n
-version: 0.1.0
+name: I18n
+version: 0.5.0
 
 description: Internationalization of Crystal programs.
 
