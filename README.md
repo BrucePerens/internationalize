@@ -153,3 +153,7 @@ One way to deal with this is to use the `add:` argument to provide
 that are not used in your native language string. For example, these
 might contain the user's preferred pronoun (in a version corresponding
 to `language_tag`).
+
+This is important because people take offense to being referred to by
+a pronoun other than their preferred one,
+and this is even a matter of [California Law](https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=201720180SB179)
