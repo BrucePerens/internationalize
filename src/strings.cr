@@ -20,7 +20,7 @@ module I18n
         {% end %}
       {% end %}
 
-      {% puts "# Replace "tag" with the appropriate IETF language tag." %}
+      {% puts "# Replace "tag" with the appropriate IETF or ISO 639 language tag." %}
       {% for a in array %}
         {% puts "  #{a.first} => #{a.last}," %}
       {% end %}
