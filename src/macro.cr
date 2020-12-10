@@ -40,6 +40,12 @@ module I18n
     I18n.translate({{native}}, {{expressions}}, {{name}}, language_tag)
     {% if flag?(:"emit-translation-strings") %}
       {% if (t = Strings[name]) == nil %}
+        # `Strings` is `Macros::HashLiteral` data during the macro stage of
+        # the compiler. Macros have access to constants and can write them.
+        # `Strings` is used here as a global shared between invocations
+        # of the `t` macro. It would be built into actual constant data
+        # later in the compile, but it is cleared before that stage of the
+        # compile in the `finished` macro in `strings.cr`
         {% Strings[name] = { native, exp, [{ original.filename, original.line_number }] } %}
       {% else %}
         {% if exp != t[1] %}
