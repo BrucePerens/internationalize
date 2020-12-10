@@ -170,3 +170,7 @@ the user has set it to "he", "she", "they", "it", or "hir", it is tranlated
 appropriately.
 * Provide automatic updating of a previously-generated translation file
 without loss of information.
+* Provide a Crystal version of my old
+https://github.com/BrucePerens/i18n-edit, which
+allowed Rails users to right-click on a string rendered by a running program,
+and directly enter the translation.
