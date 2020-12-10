@@ -123,11 +123,8 @@ into different languages. You will probably start with a machine
 translation, but these can not be expected to be correct.
 There is not an exact one-to-one mapping of words in two languages to the
 same meaning. Nor can you expect the order of words in a sentence to remain
-the same, since grammars vary widely between languages.
-Thus, a translation of an interpolated string can be awkward. The original
-writer's assumptions about what belongs before and after any variables or
-expressions in the string may not carry over to the grammar of the
-translated language.
+the same, since grammars vary widely between languages. Thus, you may easily
+change the order of the interpolated expressions in the translated string.
 
 To delve briefly into just one of the many differences between languages
 that complicate translation:
