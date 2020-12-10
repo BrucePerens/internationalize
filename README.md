@@ -44,7 +44,7 @@ This creates the data structure necessary to translate all strings in your
 program. Then you will have to fill in the translations. The translation file
 will look like this:
 ```crystal
-# 
+# Replace "tag" with the appropriate IETF language tag."
 I18n::Translations["tag"] = {
   "A $0 native language $1" => {"A $1 translated language $0", ["The user's real name", "The city in which the user lives"], [{"/home/bruce/Crystal/internationalize/src/test.cr", 9}]},
 } of String => Tuple(String, Array(String)|Nil, Array(Tuple(String, Int32)))
