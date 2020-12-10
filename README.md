@@ -89,11 +89,11 @@ t "string", exp: ["explantion of first interpolation", "explanation of second in
 When the argument `-Demit-translation-strings` is provided to
 `crystal build`,
 the compiler will emit a table of all of the strings that are provided
-as arguments to the `t()` function, possibly including duplicates.
+as arguments to `t`.
 These are written to `STDOUT` using the `Crystal::Macros#p` method.
 This table can be edited into a translation file by the
-programmer and translator, and is intended to be used by a task for
-generating such files with machine translation (not yet written).
+programmer and translator, and is intended to be used by a program for
+filling in such files using machine translation (not yet written).
 
 Languages are commonly referred to using
 [IETF language tags](https://en.wikipedia.org/wiki/IETF_language_tag),
