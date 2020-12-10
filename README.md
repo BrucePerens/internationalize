@@ -1,9 +1,11 @@
 # I18n: Internationalization for the Crystal Language.
 Internationalize strings in your program, including *interpolated* strings.
 ## Simple Usage
-Install from the command line:
-```shell
-shards install BrucePerens/i18n
+Add to shards.yml
+```
+    I18n:
+      github: BrucePerens/internationalize
+      version: "~> 0.5"
 ```
 
 Use in your project:
