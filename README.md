@@ -87,6 +87,15 @@ should be an array of strings corresponding to each interpolation, as in
 ```crystal
 t "string", exp: ["explantion of first interpolation", "explanation of second interpolation"]
 ```
+The `add` argument is an array of additional interpolated arguments that are
+not used in the native-language string, but may be useful in translations. For
+example, you may want your translations to include the correct gendered
+pronoun for the user:
+```crystal
+t "string", add: [user.preferred_pronoun(language_tag)]
+```
+This is sometimes necessary because languages other than English tend to
+masculinize sentences if the proper gender pronoun is not known.
 When the argument `-Demit-translation-strings` is provided to
 `crystal build`,
 the compiler will emit a table of all of the strings that are provided
@@ -138,3 +147,9 @@ forms of a noun. Such language differences can
 require your translator to make assumptions about what you have
 written. The default gender is usually male, which can lead to your
 translation being masculinized in ways you did not expect.
+
+One way to deal with this is to use the `add:` argument to provide
+*additional interpolated expressions*
+that are not used in your native language string. For example, these
+might contain the user's preferred pronoun (in a version corresponding
+to `language_tag`).
