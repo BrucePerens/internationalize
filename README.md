@@ -90,7 +90,7 @@ the string for the translator. If there is only one interpolation in the
 string, this can be a string. When there is more than one interpolation, it
 should be an array of strings corresponding to each interpolation, as in
 ```crystal
-t "string", exp: ["explantion of first interpolation", "explanation of second interpolation"]
+t "string #{a}, #{b}", exp: ["explantion of first interpolation", "explanation of second interpolation"]
 ```
 The `add` argument is an array of additional interpolated arguments that are
 not used in the native-language string, but may be useful in translations. For
