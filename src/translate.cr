@@ -1,5 +1,5 @@
 module I18n
-  def self.translate(native : String, arguments : Array|Nil, name : String, tag)
+  def self.translate(native : String, positional : Array|Nil, named : Hash|Nil,  name : String, tag)
     pattern = /^([^\$]*)?(\$([\$0-9]))(.*)?$/
     string = nil
     if (t = Translations[tag]?)
@@ -21,7 +21,7 @@ module I18n
           digit_or_dollar = match[3]
 
           # This is the trailing portion of the string, and may contain
-          # additional $ for arguments.
+          # additional $ for positional.
           substring = match[4]
 
           if digit_or_dollar == "$"
@@ -29,12 +29,12 @@ module I18n
           else
             # Output the argument.
             num = digit_or_dollar.to_i
-            if arguments.nil? || num > arguments.size
+            if positional.nil? || num > positional.size
               raise IndexError.new "Translation string #{string.inspect} " \
-               "names argument $#{num}, out of range, arguments are " \
-               "#{arguments.inspect}."
+               "names argument $#{num}, out of range, positional are " \
+               "#{positional.inspect}."
             end
-            output << arguments[num].to_s
+            output << positional[num].to_s
           end
         else
           # No $ in the substring, just output the whole thing.

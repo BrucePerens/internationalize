@@ -1,7 +1,8 @@
 module I18n
   macro t(original, name = nil, exp = nil, add = nil)
     {% if original.class_name == "StringInterpolation" %}
-      {% expressions = [] of StringLiteral %}
+      {% positional = [] of String %}
+      {% named = {} of String => String %}
       {% native = "" %}
       {% count = 0 %}
       {% for e, index in original.expressions %}
@@ -17,7 +18,7 @@ module I18n
           {% else %}
             {% receiver = "" %}
           {% end %}
-          {% expressions.push("#{receiver}#{e.name}(#{arguments.splat})".id) %}
+          {% positional.push("#{receiver}#{e.name}(#{arguments.splat})".id) %}
           {% native += "$#{count}" %}
           {% count += 1 %}
         {% else %}
@@ -25,10 +26,16 @@ module I18n
         {% end %}
       {% end %}
       {% if add %}
-        {% expressions += add %}
+        {% positional += add %}
+      {% end %}
+      {% if positional.size == 0 %}
+        {% positional = nil %}
+      {% end %}
+      {% if named.size == 0 %}
+        {% named = nil %}
       {% end %}
     {% elsif original.class_name == "StringLiteral" %}
-      {% native = original; expressions = nil %}
+      {% native = original; positional = nil; named = nil %}
     {% else %}
       {% raise "t(#{original}) at #{original.filename.id}:#{original.line_number}: the argument must be a literal string, not a variable or expression." %}
     {% end %}
@@ -40,7 +47,7 @@ module I18n
       {% raise "exp=#{exp} at #{original.filename}:#{original.line_number}: must be a string or array of strings." %}
     {% end %}
     # From {{original}} at {{original.filename.id}}:{{original.line_number}}"
-    I18n.translate({{native}}, {{expressions}}, {{name}}, language_tag)
+    I18n.translate({{native}}, {{positional}}, {{named}}, {{name}}, language_tag)
     {% if flag?(:"emit-translation-strings") %}
       {% if (t = Strings[name]) == nil %}
         # `Strings` is `Macros::HashLiteral` data during the macro stage of

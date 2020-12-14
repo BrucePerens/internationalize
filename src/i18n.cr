@@ -1,4 +1,5 @@
 require "./static.cr"
-require "./macro.cr"
+require "./t.cr"
+require "./tr.cr"
 require "./strings.cr"
 require "./translate.cr"
